@@ -127,16 +127,17 @@ Embeddings
 ## 🧱 System Architecture
 
 ```mermaid
-graph TD
-  A[User Document (PDF/TXT)] --> B[Summarization (Gemini 2.5 Flash)]
+flowchart TD
+  A[User Document] --> B[Summarization]
   B --> C[Store Summary & Embedding in DB]
   A --> D[Chunk Text]
   D --> E[Store Chunks & Embeddings]
+  C[Store Summary & Embedding in DB] --> G[Summary Embedding Search]
+  E[Store Chunks & Embeddings] --> I[Chunk Embedding Search]
   F[User Query] --> G[Summary Embedding Search]
-  G --> H[LLM Query Refinement (Gemini 2.0 Flash)]
+  G --> H[LLM Query Refinement]
   H --> I[Chunk Embedding Search]
-  I --> J[Final Answer (Gemini 2.5 Pro)]
-
+  I --> J[Final Answer]
 ```
 
 ----------
